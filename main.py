@@ -59,20 +59,30 @@ def LinearSelection(A,k):
 
     tam = len(A)
     if(tam == 1):
-        return A
+        return A[0]
     
     median = MOM(A,k)
 
     L = []
     R = []
+    lever = False #variavel de controle para revezar a adicao de numeros iguais a mediana. Garante que o algoritmo nao fique O(n²) por deixar as particoes balanceadas
 
     for i in range(i,tam):
-        if(A[i] < median): # se fosse menor ou igual, teriamos um algoritmo n²
+        
+        if(A[i] == median):
+            if(lever == False):
+                L.append(A[i])
+                lever = True
+            elif(lever == True):
+                R.append(A[i])
+                lever = False
+
+        elif(A[i] < median): # se fosse menor ou igual, teriamos um algoritmo n²
             L.append(A[i])
         else:
             R.append(A[i])
 
-    if(len(L)<= k-1):
+    if(len(L) == k-1):
         return median
 
     if(len(L) > k-1):
