@@ -8,6 +8,7 @@ Alunos:
 #Encontrar o K-esimo maior elemento da lista
 
 from random import randint
+from time import time
 
 def BubbleFiveSort(A): #ordena uma lista de 5 elementos. Retorna mediana | (O(cst. * cst.))
 
@@ -109,6 +110,42 @@ def SortSelection(A, k):
         raise ValueError("k está fora dos limites da lista")
     return Aord[k]
 
+def tarefa2():
+
+    tam = randint(1000,10000)
+
+    if(tam%2 == 1): #arredondando para baixo caso metade do k seja impar
+        k = tam//2 -1
+    else:
+        k = tam//2
+
+    lista_entrada = []
+    
+    lista_saida_linear = []
+    lista_saida_sort = []
+
+    for i in range(0,10):
+        buf = []
+        for j in range(0,tam):
+            buf.append(randint(1,100000))
+        lista_entrada.append(buf)
+
+    for i in range(0,10):
+        lista_saida_linear.append(LinearSelection(lista_entrada[i],k))
+        lista_saida_sort.append(LinearSelection(lista_entrada[i],k))
+
+    # print(lista_saida_linear)
+    # print(lista_saida_sort)
+
+    for i in range(0,10): #verifica se os valores estao batendo
+        if(lista_saida_linear[i] != lista_saida_sort[i]):
+            raise Exception("valor ",i,"diferente entre Linear e Sort")
+
+
+
+    return
+
+
 def testing():
 
     A = [7,8,9,10,1,2,3,4,5,6] #no rep
@@ -126,4 +163,5 @@ def testing():
         print("Valor de retorno SortSelection: ", SortSelection(lista,k))
 
 
-testing()
+# testing()
+tarefa2()
