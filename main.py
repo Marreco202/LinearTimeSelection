@@ -165,9 +165,20 @@ def tarefa2():
     dicio_linear = {'entrada': x_axis, 'tempo_saida': y_axis_linear}
     dicio_sort = {'entrada': x_axis, 'tempo_saida': y_axis_sort}
 
-    df = pd.DataFrame(dicio_linear)
+    df_linear = pd.DataFrame(dicio_linear)
+    df_sort = pd.DataFrame(dicio_sort)
 
-    df.plot(x='entrada',y='tempo_saida')
+
+    ax = plt.subplots()
+    ax = sns.barplot(x=df_sort["entrada"], y=df_sort["tempo_saida"], color='b', alpha=0.5)
+    ax = sns.barplot(x=df_linear["entrada"], y=df_linear["tempo_saida"], color='r', alpha=0.5)
+
+    ax.set(xlabel='Entrada', ylabel='Tempo de execução (s)')
+
+    # ax = sns.barplot(x="entrada", y="tempo_saida", data=df_linear)
+    # yx = sns.barplot(x="entrada", y="tempo_saida", data=df_sort)
+
+    plt.show()
 
 
     return
