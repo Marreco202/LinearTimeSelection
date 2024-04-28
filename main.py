@@ -26,7 +26,6 @@ def BubbleFiveSort(A): #ordena uma lista de 5 elementos. Retorna mediana | (O(cs
     print("fim de bubble sort!",A)
 
     if(tam%2 != 0): #lista impar
-        # print("mediana retornadapelo BubbleSort: ",A[int((tam-1)/2)])
         return A[tam//2]
     else: #lista par
         return A[tam//2 -1] #pega o menor elemento entre os dois do meio 
@@ -40,8 +39,6 @@ def MOM(A,k): #Median Of Medians algorithm | O(n)
     while i < len(A):
 
         if(resto != 0 and i+5 >= len(A)): #ultima particao menor que 5 elementos 
-            # print("saca so: ",A[i:i+resto])
-            # print("oloco: ", A[i:])
             mom_list.append(BubbleFiveSort(A[i:i+resto]))    
             break #como sao os ultimos elementos, acabou a mediana das medianas
 
@@ -103,9 +100,5 @@ def testing():
         print("K elemento sendo procurado: ",k)
         print("valor de retorno: ",LinearSelection(lista,k))
     return
-
-# A = [7,8,9,10,1,2,3,4,5,6] #no rep
-# k = 10
-# print(LinearSelection(A,k))
 
 testing()
