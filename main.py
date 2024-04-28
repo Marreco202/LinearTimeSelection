@@ -27,18 +27,17 @@ def BubbleFiveSort(A): #ordena uma lista de 5 elementos. Retorna mediana | (O(cs
     print("fim de bubble sort!",A)
 
     if(tam%2 != 0): #lista impar
-        return A[int((tam-1)/2)]
+        # print("mediana retornadapelo BubbleSort: ",A[int((tam-1)/2)])
+        return A[tam//2]
     else: #lista par
-        return A[int((tam-1)/2 - 0.5)] #pega o menor elemento entre os dois do meio 
-
-
+        return A[tam//2 -1] #pega o menor elemento entre os dois do meio 
 
 
 def MOM(A,k): #Median Of Medians algorithm | O(n)
 
     resto = len(A) % 5 #se esse valor for diferente de zero, entao este valor deve ser o tamanho da ultima particao 
     mom_list = [] 
-
+    i = 0
     while i < len(A):
 
         if(resto != 0 and i+5 >= len(A)): #ultima particao menor que 5 elementos 
@@ -49,7 +48,10 @@ def MOM(A,k): #Median Of Medians algorithm | O(n)
 
         i+=5
 
+    print("mom_list: ",mom_list)
+
     if(len(mom_list) <= 5):
+        print("retornando mediana das medianas...")
         return BubbleFiveSort(mom_list) #mediana das medianas
     else:
         return MOM(mom_list,k)
@@ -65,31 +67,24 @@ def LinearSelection(A,k):
 
     L = []
     R = []
-    lever = False #variavel de controle para revezar a adicao de numeros iguais a mediana. Garante que o algoritmo nao fique O(n²) por deixar as particoes balanceadas
+    M = []
 
-    for i in range(i,tam):
-        
+    for i in range(0,tam):
+
         if(A[i] == median):
-            if(lever == False):
-                L.append(A[i])
-                lever = True
-            elif(lever == True):
-                R.append(A[i])
-                lever = False
-
+            M.append(A[i])
         elif(A[i] < median): # se fosse menor ou igual, teriamos um algoritmo n²
             L.append(A[i])
         else:
             R.append(A[i])
 
-    if(len(L) == k-1):
+    if(len(L) + len(M) >= k and len(L) < k):
         return median
 
-    if(len(L) > k-1):
-        LinearSelection(L,k)
+    if(len(L) >= k):
+        return LinearSelection(L,k)
     else:
-        LinearSelection(R, k - len(L) - 1)
+        return LinearSelection(R, k - len(L) - len(M))
 
 
-
-BubbleFiveSort([1,1,5,4,3])
+print("valor de retorno: ",LinearSelection(A,5))
