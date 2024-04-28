@@ -42,7 +42,7 @@ def MOM(A,k): #Median Of Medians algorithm | O(n)
     while i < len(A):
 
         if(resto != 0 and i+5 >= len(A)): #ultima particao menor que 5 elementos 
-            mom_list.append(BubbleFiveSort(A[i:i+resto]))    
+            mom_list.append(BubbleFiveSort(A[i:i+resto-1]))    
             break #como sao os ultimos elementos, acabou a mediana das medianas
 
         mom_list.append(BubbleFiveSort(A[i:i+5])) #pega a mediana do primeiro grupo de 5
