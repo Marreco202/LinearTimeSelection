@@ -108,7 +108,8 @@ def SortSelection(A, k):
     n = len(Aord)
     if k <= 0 or k > n:
         raise ValueError("k está fora dos limites da lista")
-    return Aord[k]
+    return Aord[k-1]
+
 
 def tarefa2():
 
@@ -131,14 +132,19 @@ def tarefa2():
         lista_entrada.append(buf)
 
     for i in range(0,10):
-        lista_saida_linear.append(LinearSelection(lista_entrada[i],k))
-        lista_saida_sort.append(LinearSelection(lista_entrada[i],k))
+        start = time()
+        buf_linear = LinearSelection(lista_entrada[i],k)
+        lista_saida_linear.append([buf_linear,time() - start])
+
+        start = time()
+        buf_sort = SortSelection(lista_entrada[i],k)
+        lista_saida_sort.append([buf_sort,time() - start])
 
     # print(lista_saida_linear)
     # print(lista_saida_sort)
 
     for i in range(0,10): #verifica se os valores estao batendo
-        if(lista_saida_linear[i] != lista_saida_sort[i]):
+        if(lista_saida_linear[i][0] != lista_saida_sort[i][0]):
             raise Exception("valor ",i,"diferente entre Linear e Sort")
 
 
