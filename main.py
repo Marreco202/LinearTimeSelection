@@ -23,7 +23,7 @@ def BubbleFiveSort(A): #ordena uma lista de 5 elementos. Retorna mediana | (O(cs
                 A[j+1] = A[j]
                 A[j] = buf
 
-    print("fim de bubble sort!",A)
+    #print("fim de bubble sort!",A)
 
     if(tam%2 != 0): #lista impar
         return A[tam//2]
@@ -46,10 +46,10 @@ def MOM(A,k): #Median Of Medians algorithm | O(n)
 
         i+=5
 
-    print("mom_list: ",mom_list)
+    #print("mom_list: ",mom_list)
 
     if(len(mom_list) <= 5):
-        print("retornando mediana das medianas...")
+        #print("retornando mediana das medianas...")
         return BubbleFiveSort(mom_list) #mediana das medianas
     else:
         return MOM(mom_list,k)
@@ -84,10 +84,17 @@ def LinearSelection(A,k):
     else:
         return LinearSelection(R, k - len(L) - len(M))
 
+def SortSelection(A, k):
+    Aord = A
+    BubbleFiveSort(Aord)
+    n = len(Aord)
+    if k <= 0 or k > n:
+        raise ValueError("k está fora dos limites da lista")
+    return Aord[k - 1]
 
 def testing():
 
-    A = [7,8,9,10,1,2,3,4,5,6,] #no rep
+    A = [7,8,9,10,1,2,3,4,5,6] #no rep
     B = [1,4,5,5,7,9,8,10,2,4,10,10,] #w/ rep
     C = [1,2,3,4] #len < 5
     D = [3,3,3,3,3,3,3,3,3]# all rep
@@ -95,10 +102,11 @@ def testing():
 
     for i in range(0,len(test_list)):
         lista = test_list[i]
-        k = randint(1,len(lista))
-        print(i,"Lista sendo testada: ",lista)
+        k = (len(lista)//2)
+        print("Lista", i, "sendo testada: ",lista)
         print("K elemento sendo procurado: ",k)
-        print("valor de retorno: ",LinearSelection(lista,k))
-    return
+        print("valor de retorno LinearSelection: ",LinearSelection(lista,k))
+        print("Valor de retorno SortSelection: ", SortSelection(lista,k))
+
 
 testing()
