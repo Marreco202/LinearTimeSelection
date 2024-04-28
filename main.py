@@ -9,6 +9,8 @@ Alunos:
 
 from random import randint
 from time import time
+import seaborn as sns
+import pandas as pd
 
 def BubbleFiveSort(A): #ordena uma lista de 5 elementos. Retorna mediana | (O(cst. * cst.))
 
@@ -148,6 +150,23 @@ def tarefa2():
             raise Exception("valor ",i,"diferente entre Linear e Sort")
 
 
+    #PLOTTING
+
+    x_axis = []
+    y_axis_linear = []
+    y_axis_sort = []
+
+    for i in range(0,10): #pega os eixos e os tempos
+        x_axis.append(lista_saida_linear[i][0])
+        y_axis_linear.append(lista_saida_linear[i][1])
+        y_axis_sort.append(lista_saida_sort[i][1])
+
+    dicio_linear = {'entrada': x_axis, 'tempo_saida': y_axis_linear}
+    dicio_sort = {'entrada': x_axis, 'tempo_saida': y_axis_sort}
+
+    df = pd.DataFrame(dicio_linear)
+
+    df.plot()
 
     return
 
