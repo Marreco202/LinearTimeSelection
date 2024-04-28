@@ -1,6 +1,6 @@
 '''
 Alunos: 
-    Guilherme A. Ponce (inserir matricula)
+    Guilherme A. Ponce (2011179)
     João Victor Godinho W. (2011401)
 
 '''
