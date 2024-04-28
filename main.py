@@ -31,6 +31,24 @@ def BubbleFiveSort(A): #ordena uma lista de 5 elementos. Retorna mediana | (O(cs
         return A[tam//2 -1] #pega o menor elemento entre os dois do meio 
 
 
+def BubbleSort(A): #ordena uma lista de 5 elementos. Retorna mediana | (O(cst. * cst.))
+
+    tam = len(A) #sempre sera 5, entao a complexidade dos fors sera tempo cst.
+                 #so nao hard coded o numero 5 nos ranges pq temos ainda que fazer o bubble sort da particao 
+
+    for i in range(0,tam):
+        for j in range(0,tam):
+            if(j+1 >= tam):
+                break #lista esta ordenada
+            elif(A[j] > A[j+1]):
+                buf = A[j+1]
+                A[j+1] = A[j]
+                A[j] = buf
+
+    #print("fim de bubble sort!",A)
+
+    return A
+
 def MOM(A,k): #Median Of Medians algorithm | O(n)
 
     resto = len(A) % 5 #se esse valor for diferente de zero, entao este valor deve ser o tamanho da ultima particao 
@@ -85,12 +103,11 @@ def LinearSelection(A,k):
         return LinearSelection(R, k - len(L) - len(M))
 
 def SortSelection(A, k):
-    Aord = A
-    BubbleFiveSort(Aord)
+    Aord = BubbleSort(A)
     n = len(Aord)
     if k <= 0 or k > n:
         raise ValueError("k está fora dos limites da lista")
-    return Aord[k - 1]
+    return Aord[k]
 
 def testing():
 
