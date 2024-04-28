@@ -11,6 +11,7 @@ from random import randint
 from time import time
 import seaborn as sns
 import pandas as pd
+import matplotlib.pyplot as plt
 
 def BubbleFiveSort(A): #ordena uma lista de 5 elementos. Retorna mediana | (O(cst. * cst.))
 
@@ -166,7 +167,8 @@ def tarefa2():
 
     df = pd.DataFrame(dicio_linear)
 
-    df.plot()
+    df.plot(x='entrada',y='tempo_saida')
+
 
     return
 
